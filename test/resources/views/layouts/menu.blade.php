@@ -5,7 +5,7 @@
                             @if (Route::has('login'))
                             <li>    
                                 <a href="{{url('/')}}" uk-tooltip="title: Home; pos: bottom"> 
-                                    <span uk-icon="home"> 
+                                    <span uk-icon="home" style="color:white"> 
                                     </span>
                                 </a>
                             </li>
@@ -13,7 +13,7 @@
                       @else  
                              <li>
                                 <a href="#offcanvas-usage" uk-toggle uk-tooltip="title: Menu; pos: bottom">
-                                    <span uk-icon="menu"> 
+                                    <span uk-icon="menu" style="color:white"> 
                                     </span>
                                 </a>
                             </li>
@@ -25,14 +25,14 @@
                         @guest
                             @if (Route::has('register'))
                                 <li> 
-                                    <a href="{{ route('register') }}">
+                                    <a href="{{ route('register') }}" style="color:white">
                                             {{ __('messages.Register') }} 
                                     </a>     
                                </li> 
                             @endif
                             @if (Route::has('login'))
                                 <li> 
-                                    <a href="{{ route('login') }}">
+                                    <a href="{{ route('login') }}" style="color:white">
                                             {{ __('messages.Login') }} 
                                     </a>     
                                </li> 
