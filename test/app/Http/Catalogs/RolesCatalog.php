@@ -2,6 +2,7 @@
 namespace App\Http\Catalogs;
 
 use App\Models\Rol;
+use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
@@ -68,6 +69,26 @@ class RolesCatalog
         {
             Log::error('Delete rol exception',['line'=> $e->getTraceAsString()]);  
             return throw $e;
+        }
+    }
+
+    public static function getRolesNotApplied(User $user)
+    {
+        try
+        {
+             $roles = Rol::all();
+             $rolesNotApplied = $roles->diff($user->roles);
+             return $rolesNotApplied;
+        }
+        catch(QueryException $e)
+        {
+           Log::error('Select rol sql exception',['line'=> $e->getTraceAsString()]);  
+           return throw $e;
+        }
+        catch(\Exception $e)
+        {
+           Log::error('Select rol exception',['line'=> $e->getTraceAsString()]);  
+           return throw $e;
         }
     }
 }

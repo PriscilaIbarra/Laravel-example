@@ -57,5 +57,9 @@ return [
     'Assign Roles'=>'Asignar roles',
     'Rol'=>'Rol',
     'Back'=>'Atras',
-    'Cancel'=>'Cancelar'
+    'Cancel'=>'Cancelar',
+    'Assign Roles'=>'Asignar Roles',
+    'Roles Assign'=>'Roles Asignados',
+    'Assign'=>'Asignar',
+    'Unassign Rol'=>'Desasignar rol'
 ];

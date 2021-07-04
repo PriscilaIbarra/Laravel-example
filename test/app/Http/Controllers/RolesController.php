@@ -17,8 +17,14 @@ class RolesController extends Controller
 {
     public function showRolesView()
     {
-       /// $roles = RolesCatalog::getRolesDistinctOf(Auth::user()->roles());
-       return view('roles.main',['roles'=>Rol::all()]);
+       try
+       {
+         return view('roles.main',['roles'=> RolesCatalog::getRolesNotApplied(Auth::user())]);
+       }
+       catch(\Exception $e)
+       {
+         return view('roles.main',['roles'=>[]]);   
+       }
     }
 
     public function validateFormData(array $data)

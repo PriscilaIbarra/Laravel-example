@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
 <div class="uk-child-width-expand" uk-grid>
     <div class="uk-container uk-width-1-6">
@@ -17,27 +18,91 @@
             <div class="uk-card-body uk-child-width-expand" uk-grid>
                 <form method="post" action="{{route('user.add')}}" class="uk-margin-left uk-margin-top uk-margin-bottom uk-margin-right" enctype="multipart/form-data">
                  @csrf
-                   <div  class="uk-grid-row uk-margin-top">
-                      <div class="uk-form-contusers uk-child-width-expand">
-                        <sup class="uk-form-label" for="name">{{ __('messages.Description') }}</sup><br>  
-                        <div class="uk-inline">  
-                            <input id="description" 
-                            type="text" class="uk-child-width-expand uk-input @error('description') uk-form-danger @enderror " 
-                            name="description" value="{{ old('description') }}" required autocomplete="description" autofocus>                           
-                        </div> 
-                      </div>
-                        @error('description')
-                          <span class="uk-form-danger" usere="alert">
-                            <strong>{{ $message }}</strong>
-                          </span>
-                        @enderror
-                    </div>               
-                    <div class="uk-grid-row uk-align-right">
-                      <button type="submit" class="uk-icon-button uk-margin-top uk-background-muted"   style="background-color:#d5d3d3"                            
-                              uk-icon="icon:plus" uk-tooltip="title: {{__('messages.Add')}}; pos: bottom">
-                      </button>   
-                    </div>                 
-                   </div>
+                     <fieldset class="uk-fieldset"> 
+                        <div class="uk-child-width-expand" uk-grid>
+                              <div class="uk-form-controls uk-child-width-expand">
+                                    <sup class="uk-form-label">{{__('messages.Name')}}</sup>
+                                    <div class="uk-inline">
+                                        <span class="uk-form-icon" uk-icon="icon:user"></span>
+                                        <input type="text" 
+                                        class="uk-input @error('name') uk-form-danger @enderror"
+                                        value="{{ old('name') }}"
+                                        id="name"
+                                        name="name" 
+                                        required 
+                                        autocomplete="name"
+                                        autofocus
+                                        />
+                                        @error('name')
+                                            <span class="uk-form-danger" role="alert">
+                                                {{$message}}
+                                            </span>  
+                                        @enderror
+                                     </div>   
+                                </div>         
+                        </div>                     
+                        <div class="uk-form-controls uk-child-width-expand uk-margin-top">
+                             <sup class="uk-form-label">{{__('messages.E-Mail')}}</sup>
+                             <div class="uk-inline">
+                               <span class="uk-form-icon" uk-icon="icon:mail"></span>
+                               <input type="email"
+                                class="uk-input @error('email') uk-form-danger @enderror" 
+                                value="{{ old('email') }}"
+                                id="email"
+                                name="email"
+                                required 
+                                autocomplete="email" 
+                                />
+                             </div>
+                              @error('email')
+                              <span class="uk-form-danger" role="alert">
+                                   {{$message}}
+                              </span>  
+                              @enderror
+                        </div>
+                        <div class="uk-form-controls uk-child-width-expand uk-margin-top">
+                             <sup class="uk-form-label">{{__('messages.Password')}}</sup>
+                             <div class="uk-inline">
+                               <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                               <input type="password" 
+                               class="uk-input @error('password') uk-form-danger @enderror" 
+                               value="{{ old('password') }}" 
+                               name="password"
+                               id="password" 
+                               required 
+                               autocomplete="new-password" 
+                               />
+                             </div>
+                             @error('password')
+                                 <span class="uk-form-danger" role="alert">
+                                    {{$message}}
+                                 </span>  
+                             @enderror
+                        </div>
+                        <div class="uk-form-controls uk-child-width-expand uk-margin-top">
+                             <sup class="uk-form-label">{{__('messages.Confirm-Password')}}</sup>
+                              <div class="uk-inline">
+                                 <span class="uk-form-icon" uk-icon="icon:lock"></span>
+                                 <input type="password"
+                                  class="uk-input @error('password') uk-form-danger @enderror"
+                                  id="password-confirm" 
+                                  name="password_confirmation"
+                                  required
+                                  autocomplete="new-password"
+                                 />
+                              </div>
+                              @error('password_confirmation')
+                                 <span class="uk-form-danger" role="alert">
+                                       {{$message}}
+                                 </span>  
+                              @enderror  
+                        </div>
+                       <button type="submit" 
+                       class="uk-button uk-button-primary uk-margin-top uk-margin-remove-bottom
+                       background-gradient uk-align-right">
+                            {{ __('messages.Add') }}                                                         
+                       </button>                   
+                     </fieldset>
                 </form>
             </div>        
         </div>
@@ -57,7 +122,8 @@
                     <table class="uk-table uk-table-striped uk-margin-remove-left uk-margin-remove-top uk-table-small">
                         <thead>
                             <tr>
-                                <th class="uk-preserve-width uk-text-capitalize uk-text-secondary">{{__('messages.Description')}}</th>
+                                <th class="uk-preserve-width uk-text-capitalize uk-text-secondary">{{__('messages.Name')}}</th>
+                                <th class="uk-preserve-width uk-text-capitalize uk-text-secondary">{{__('messages.E-Mail')}}</th>   
                                 <th class="uk-preserve-width uk-text-capitalize uk-text-secondary"></th>                           
                             </tr>
                         </thead>
@@ -65,16 +131,22 @@
                            @foreach($users as $user)
                             <tr>
                                 <td class="uk-preserve-width">
-                                <div class="uk-container uk-grid">
-                                    <div class="uk-width-1-2">
-                                      {{$user->id}}
-                                    </div>        
-                                    <div class="uk-width-1-2">
-                                      {{$user->description}}
-                                    </div>                          
-                                </div>
+                                  {{$user->name}}
+                                </td>
+                                <td class="uk-preserve-width">
+                                  {{$user->email}}  
                                 </td>
                                 <td class="uk-align-right uk-preserve-width">
+                                    <a
+                                    href="{{route('user.roles',$user->id)}}"
+                                    uk-toggle
+                                    uk-tooltip="title: {{__('messages.Assign Roles')}}; pos: bottom"
+                                    >
+                                      <span 
+                                      uk-icon="icon:users" 
+                                      class="uk-text-primary"> 
+                                      </span>
+                                    </a>   
                                     <a
                                     href="{{route('user.edit',$user->id)}}"
                                     uk-toggle
@@ -84,7 +156,7 @@
                                       uk-icon="icon:pencil" 
                                       class="uk-text-warning"> 
                                       </span>
-                                    </a>                                    
+                                    </a>
                                     <button class="uk-icon-button  uk-text-danger"  
                                     uk-icon="icon:trash" type="button"
                                     uk-toggle="target: {{'#delete-user-'.$user->id}}"
@@ -112,7 +184,7 @@
                                <div class="uk-child-width-expand uk-align-center uk-margin-remove" uk-grid>
                                     <div class="uk-width-1-1">
                                         <div class="uk-form-contusers uk-child-width-expand">  
-                                            {{__('msgs.delete-user-part-1')}} <strong class="uk-text-emphasis">{{$user->description}}</strong>{{__('msgs.delete-user-part-2')}}
+                                            {{__('msgs.delete-user-part-1')}} <strong class="uk-text-emphasis">{{$user->name}}</strong>{{__('msgs.delete-user-part-2')}}
                                         </div>
                                     </div>
                                </div>

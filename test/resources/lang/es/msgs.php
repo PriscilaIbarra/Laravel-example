@@ -21,6 +21,14 @@ return [
  'update-rol-success'=>'Rol actualizado con éxito',
  'update-rol-error'=>'Ha ocurrido un problema no se ha podido completar la operación',
  'delete-rol-error'=>'Error al eliminar rol.',
- 'delete-rol-success'=>'Rol eliminado con éxito.'
-
+ 'delete-rol-success'=>'Rol eliminado con éxito.',
+ 'add-user-success'=>'Usuario registrado con éxito',
+ 'add-user-error'=>'Ha ocurrido un problema no se ha podido completar la operación',
+ 'delete-user-part-1'=>'Está seguro que desea eliminar al usuario ',
+ 'delete-user-part-2'=>'?',
+ 'user-roles-error'=>'Ha ocurrido un problema no se ha podido completar la operación',
+ 'add-rol-user-success'=>'Rol asignado con éxito',
+ 'add-rol-user-error'=>'Ha ocurrido un problema no se ha podido completar la operación',
+ 'unassign-rol-user-success'=>'Rol desasignado con éxito.',
+ 'unassign-rol-user-error'=>'Ha ocurrido un problema no se ha podido completar la operación'  
 ];
