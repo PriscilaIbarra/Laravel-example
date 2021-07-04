@@ -51,5 +51,11 @@ return [
     'URL'=>'URL',
     'Settings'=>'Ajustes',
     'Edit_Profile'=>'Editar perfil',
-    'Change_password'=>'Cambiar contraseña'
+    'Change_password'=>'Cambiar contraseña',
+    'Users'=>'Usuarios',
+    'Rols'=>'Roles',
+    'Assign Roles'=>'Asignar roles',
+    'Rol'=>'Rol',
+    'Back'=>'Atras',
+    'Cancel'=>'Cancelar'
 ];

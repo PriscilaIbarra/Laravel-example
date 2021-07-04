@@ -93,7 +93,7 @@ return [
     'multiple_of' => 'The :attribute must be a multiple of :value.',
     'not_in' => 'The selected :attribute is invalid.',
     'not_regex' => 'The :attribute format is invalid.',
-    'numeric' => 'The :attribute must be a number.',
+    'numeric' => 'El :attribute debe ser un número.',
     'password' => 'La contraseña es incorrecta.',
     'present' => 'The :attribute field must be present.',
     'regex' => 'Formato invalido.',
@@ -116,7 +116,7 @@ return [
     'starts_with' => 'The :attribute must start with one of the following: :values.',
     'string' => 'El campo :attribute debe ser una cadena.',
     'timezone' => 'The :attribute must be a valid zone.',
-    'unique' => 'El :attribute ya se encuentra registrado.',
+    'unique' => 'El valor ingresado ya se encuentra registrado.',
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'Formato de url inválido.',
     'uuid' => 'The :attribute must be a valid UUID.',
@@ -175,7 +175,7 @@ return [
         'file'=>'imagen',
         'subject'=>'asunto',  
         'newPassword'=>'nueva contraseña',
-
+        'price'=>'precio'
     ],
 
 ];

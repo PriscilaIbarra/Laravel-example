@@ -81,67 +81,23 @@
                 <hr>
         </div>
         <h3 class="uk-text-center">{{__('messages.Menu')}}</h3>
-        <ul class="uk-list" uk-accordion="multiple: true">                 
-                     <li> 
-                    <a class="uk-accordion-title" style="font-size:17px">               
-                        <span class="uk-icon-button"  uk-icon="server"> 
+        <ul class="uk-list" uk-accordion="multiple: true">  
+              @auth                        
+              <li> 
+                    <a href="{{route('users.show')}}" style="font-size:17px">               
+                        <span class="uk-icon-button"  uk-icon="happy"> 
                         </span> 
-                  
-                    </a>   
-                    <div class="uk-accordion-content uk-margin-left">
-                        <ul class="uk-list">                                         
-                            <ul uk-accordion>
-                                <li>
-                                    <a style="font-size:14px" class="uk-accordion-title"> 
-                                        <span class="uk-icon-button" uk-icon="video-camera"></span>
-                                         
-                                    </a>
-                                    <div class="uk-accordion-content uk-margin-left" >
-                                        <ul class="uk-list">
-                                            <li>
-                                                <a style="font-size:14px" > 
-                                                    <span class="uk-icon-button"  uk-icon="check"></span>
-                                                    
-                                                </a>
-                                            </li> 
-                                            <li>
-                                                <a style="font-size:14px" > 
-                                                    <span class="uk-icon-button"  uk-icon="check"></span>
-                                                a
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>       
-                                </li> 
-                            </ul>
-                            <ul uk-accordion>
-                                <li>
-                                    <a style="font-size:14px" class="uk-accordion-title"> 
-                                        <span class="uk-icon-button"  uk-icon="image"></span>
-                                      
-                                    </a>
-                                    <div class="uk-accordion-content uk-margin-left" >
-                                        <ul class="uk-list">
-                                            <li>
-                                                <a style="font-size:14px"  > 
-                                                    <span class="uk-icon-button"  uk-icon="check"></span>
-                                                a
-                                                </a>
-                                            </li> 
-                                            <li>
-                                                <a style="font-size:14px" > 
-                                                    <span class="uk-icon-button"  uk-icon="check"></span>
-                                                a
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>       
-                                </li> 
-                            </ul>
-                        </ul>
-                    </div>
-                   </li> 
-        
+                        {{__('messages.Users')}}
+                    </a>                      
+              </li>
+              <li> 
+                  <a  style="font-size:17px" href="{{route('roles.show')}}">               
+                    <span class="uk-icon-button"  uk-icon="server"> 
+                    </span> 
+                    {{__('messages.Rols')}}
+                  </a> 
+              </li>  
+            @endauth 
            <li>      
                 <a href="{{ route('logout') }}"
                    uk-toggle uk-tooltip="title: {{ __('messages.Logout') }}; pos: bottom"  
