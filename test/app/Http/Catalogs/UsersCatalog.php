@@ -5,8 +5,9 @@ use App\Models\User;
 use App\Models\Rol;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
 class UsersCatalog
 {
     
@@ -19,6 +20,7 @@ class UsersCatalog
     {
         try
         {
+            $data['created_by'] = Auth::user()->id;
             User::create($data);
         }
         catch(QueryException $e)
@@ -32,6 +34,49 @@ class UsersCatalog
            return  throw $e;  
         } 
         
+    }
+
+    public static function updateUser(User $user ,User $userToUpdate)
+    {
+        try
+        {
+            $user->name = $userToUpdate->name;
+            $user->email = $userToUpdate->email;
+            $user->password = isset($userToUpdate->password)? Hash::make($userToUpdate->password) : $user->password;
+            $user->update();
+        }
+        catch(QueryException $e)
+        {
+            Log::error('Update user sql exception',['line'=> $e->getTraceAsString()]);
+            return throw $e;
+        }
+        catch(\Exception $e)
+        {
+
+           Log::error('Update user exception',['line'=> $e->getTraceAsString()]);
+           return  throw $e;  
+        }
+    }
+
+    public static function deleteUser(User $user)
+    {
+        try
+        {
+            $user->roles()->detach();
+            $user->delete();
+        }
+        catch(QueryException $e)
+        {
+            Log::error('Delete user sql exception',['line'=> $e->getTraceAsString()]);
+            return throw $e;
+        }
+        catch(\Exception $e)
+        {
+
+           Log::error('Delete user exception',['line'=> $e->getTraceAsString()]);
+           return  throw $e;  
+        }
+       
     }
 
     public static function assignRol(User $user, Rol $rol )

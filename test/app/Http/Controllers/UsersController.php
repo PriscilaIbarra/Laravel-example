@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Catalogs\RolesCatalog;
 use App\Models\User;
+use App\Rules\UniqueIfEmailHasChange;
 use App\Http\Catalogs\UsersCatalog;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
@@ -22,7 +23,7 @@ class UsersController extends Controller
     public function validateData(array $data)
     {
         $rules =  [
-          'name' => ['required', 'string', 'max:255'],
+          'name' => ['required', 'string', 'max:255','regex:/^[a-zA-Z ]*$/'],
           'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
           'password' => ['required', 'string', 'min:8', 'confirmed'],
         ];     
@@ -52,6 +53,83 @@ class UsersController extends Controller
         {
             Log::error('Add Rol exception',['line'=> $e->getTraceAsString()]); 
             return back()->withInput()->with('msg','add-user-error');
+        }
+    }
+
+    public function showEditUserView(int $id)
+    {
+        try
+        {
+            $user = UsersCatalog::searchUser($id);           
+            return view('users.edit',['user'=>$user]);
+        }
+        catch(ModelNotFoundException $e)
+        {
+            Log::error('User not found',['line'=>$e->getTraceAsString()]);
+            return back()->with('msg','user-not-found-error');
+        }
+        catch(\Exception $e)
+        {
+           Log::error('Show edit user view exception',['line'=>$e->getTraceAsString()]); 
+           return back()->with('msg','show-edit-user-exception'); 
+        }
+    }
+
+    public function validateFormData(array $data)
+    {
+        $rules =  [
+          'name' => ['required', 'string', 'max:255','regex:/^[a-zA-Z ]*$/'],
+          'email' => ['required', 'string', 'email', 'max:255',new UniqueIfEmailHasChange($data) ],
+          'password' => ['nullable','string', 'min:8', 'confirmed'],
+        ];     
+        $validator = Validator::make($data,$rules);
+        return $validator->validate();    
+    }
+
+    public function updateUser(Request $request)
+    {
+        try
+        {
+            $this->validateFormData($request->all());
+            $user = UsersCatalog::searchUser($request->input('id'));
+            $userToUpdate = new User($request->all());
+            UsersCatalog::updateUser($user,$userToUpdate);
+            return redirect('/users')->with('msg','update-user-success');
+        }
+        catch(ValidationException $e)
+        {
+            Log::error('Form data is invalid',['line'=>$e->getTraceAsString()]);
+            return back()->withInput()->withErrors($e->errors());
+        }
+        catch(QueryException $e)
+        {
+            Log::error('Update user sql exception',['line'=> $e->getTraceAsString()]);
+            return back()->with('msg','update-user-error');
+        }
+        catch(\Exception $e)
+        {
+            Log::error('Update user exception',['line'=>$e->getTraceAsString()]);
+            return back()->with('msg','update-user-error');
+        }
+    }
+
+    public function deleteUser( int $id)
+    {
+        try
+        {
+            $user = UsersCatalog::searchUser($id);
+            UsersCatalog::deleteUser($user);
+            return redirect('/users')->with('msg','delete-user-success');
+        }
+        catch(ModelNotFoundException $e)
+        {
+           Log::error('User not found',['line'=>$e->getTraceAsString()]);
+           return back()->with('msg','user-not-found-error');
+        }
+        catch(\Exception $e)
+        {
+           Log::error('Delete user exception',['line'=>$e->getTraceAsString()]);
+           return back()->with('msg','user-not-found-error');
         }
     }
 

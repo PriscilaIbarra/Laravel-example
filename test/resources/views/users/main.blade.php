@@ -60,42 +60,48 @@
                               </span>  
                               @enderror
                         </div>
-                        <div class="uk-form-controls uk-child-width-expand uk-margin-top">
-                             <sup class="uk-form-label">{{__('messages.Password')}}</sup>
-                             <div class="uk-inline">
-                               <span class="uk-form-icon" uk-icon="icon: lock"></span>
-                               <input type="password" 
-                               class="uk-input @error('password') uk-form-danger @enderror" 
-                               value="{{ old('password') }}" 
-                               name="password"
-                               id="password" 
-                               required 
-                               autocomplete="new-password" 
-                               />
-                             </div>
-                             @error('password')
-                                 <span class="uk-form-danger" role="alert">
-                                    {{$message}}
-                                 </span>  
-                             @enderror
-                        </div>
-                        <div class="uk-form-controls uk-child-width-expand uk-margin-top">
-                             <sup class="uk-form-label">{{__('messages.Confirm-Password')}}</sup>
-                              <div class="uk-inline">
-                                 <span class="uk-form-icon" uk-icon="icon:lock"></span>
-                                 <input type="password"
-                                  class="uk-input @error('password') uk-form-danger @enderror"
-                                  id="password-confirm" 
-                                  name="password_confirmation"
-                                  required
-                                  autocomplete="new-password"
-                                 />
-                              </div>
-                              @error('password_confirmation')
-                                 <span class="uk-form-danger" role="alert">
-                                       {{$message}}
-                                 </span>  
-                              @enderror  
+                        <div uk-grid>
+                            <div class="uk-width-1-2@s">
+                                <div class="uk-form-controls uk-child-width-expand uk-margin-top">
+                                    <sup class="uk-form-label">{{__('messages.Password')}}</sup>
+                                    <div class="uk-inline">
+                                    <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                                    <input type="password" 
+                                    class="uk-input @error('password') uk-form-danger @enderror" 
+                                    value="{{ old('password') }}" 
+                                    name="password"
+                                    id="password" 
+                                    required 
+                                    autocomplete="new-password" 
+                                    />
+                                    </div>
+                                    @error('password')
+                                        <span class="uk-form-danger" role="alert">
+                                            {{$message}}
+                                        </span>  
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="uk-width-1-2@s">
+                                  <div class="uk-form-controls uk-child-width-expand uk-margin-top">
+                                    <sup class="uk-form-label">{{__('messages.Confirm-Password')}}</sup>
+                                    <div class="uk-inline">
+                                        <span class="uk-form-icon" uk-icon="icon:lock"></span>
+                                        <input type="password"
+                                        class="uk-input @error('password') uk-form-danger @enderror"
+                                        id="password-confirm" 
+                                        name="password_confirmation"
+                                        required
+                                        autocomplete="new-password"
+                                        />
+                                    </div>
+                                    @error('password_confirmation')
+                                        <span class="uk-form-danger" role="alert">
+                                            {{$message}}
+                                        </span>  
+                                    @enderror  
+                                </div>
+                            </div>
                         </div>
                        <button type="submit" 
                        class="uk-button uk-button-primary uk-margin-top uk-margin-remove-bottom
@@ -106,9 +112,7 @@
                 </form>
             </div>        
         </div>
-    </div>
-    <div class="uk-container uk-width-1-6">
-    </div>
+    </div>   
 </div>
 <div class="uk-child-width-expand" uk-grid>
     <div class="uk-container uk-width-1-6">
@@ -128,7 +132,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                           @foreach($users as $user)
+                           @foreach(Auth::user()->users as $user)
                             <tr>
                                 <td class="uk-preserve-width">
                                   {{$user->name}}

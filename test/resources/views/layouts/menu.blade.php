@@ -24,11 +24,11 @@
                     <ul class="uk-navbar-nav"> 
                         @guest
                             @if (Route::has('register'))
-                                <li> 
+                                <!--<li> 
                                     <a href="{{ route('register') }}" style="color:white">
                                             {{ __('messages.Register') }} 
                                     </a>     
-                               </li> 
+                               </li> -->
                             @endif
                             @if (Route::has('login'))
                                 <li> 

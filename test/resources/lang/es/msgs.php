@@ -26,9 +26,14 @@ return [
  'add-user-error'=>'Ha ocurrido un problema no se ha podido completar la operación',
  'delete-user-part-1'=>'Está seguro que desea eliminar al usuario ',
  'delete-user-part-2'=>'?',
+ 'delete-user-success'=>'Usuario eliminado con éxito',
  'user-roles-error'=>'Ha ocurrido un problema no se ha podido completar la operación',
  'add-rol-user-success'=>'Rol asignado con éxito',
  'add-rol-user-error'=>'Ha ocurrido un problema no se ha podido completar la operación',
  'unassign-rol-user-success'=>'Rol desasignado con éxito.',
- 'unassign-rol-user-error'=>'Ha ocurrido un problema no se ha podido completar la operación'  
+ 'unassign-rol-user-error'=>'Ha ocurrido un problema no se ha podido completar la operación',
+ 'user-not-found-error'=>'Usuario no encontrado',  
+ 'show-edit-user-exception'=>'Ha ocurrido un problema no se ha podido completar la operación',
+ 'update-user-success'=>'Usuario actualizado con éxito',
+ 'update-user-error'=>'Ha ocurrido un problema no se ha podido completar la operación',
 ];

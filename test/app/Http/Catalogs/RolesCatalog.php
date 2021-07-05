@@ -6,18 +6,12 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\DB;
 
 class RolesCatalog
 {
     public static function seachRol(int $id)
     {
        return Rol::findOrFail($id);
-    }
-
-    public static function getRolesDistinctOf(array $roles)
-    {
-        
     }
 
     public static function updateRol(Rol $rol)

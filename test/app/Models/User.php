@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'created_by'
     ];
 
     /**
@@ -46,4 +47,25 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Rol','users_roles','user_id','rol_id');
     }
     
+    public function users()
+    {
+        return $this->hasMany('App\Models\User','created_by','id');
+    }
+
+    public function createdByUser()
+    {
+        return $this->belongsTo('App\Models\User','created_by');
+    }
+
+    public function hasRol(string $description)
+    {
+        try
+        {
+            return $this->roles->contains(Rol::where('description','=',$description)->get()->first());
+        }
+        catch(\Exception $e)
+        {
+            return false;
+        }
+    }
 }

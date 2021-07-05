@@ -24,17 +24,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['auth'])->group(function(){
 
     Route::get('/users',[App\Http\Controllers\UsersController::class,'showUsersView'])->name('users.show');
-    Route::post('/user-add',[App\Http\Controllers\UsersController::class,'addUser'])->name('user.add');
-    
+    Route::post('/user-add',[App\Http\Controllers\UsersController::class,'addUser'])->name('user.add');    
     Route::get('/user-roles/{id}',[App\Http\Controllers\UsersController::class,'showUserRolesView'])->name('user.roles');
     Route::post('/assign-rol',[App\Http\Controllers\UsersController::class,'assignRol'])->name('rol.assign');
     Route::post('/unassign-rol',[App\Http\Controllers\UsersController::class,'unassignRol'])->name('rol.unassign');
-
-    Route::post('/user-edit',[App\Http\Controllers\UsersController::class,'editUser'])->name('user.edit');
-    Route::get('/user-delete/{id}',[App\Http\Controllers\RolesController::class,'deleteRol'])->name('user.delete');   
-  
-
-
+    Route::get('/user-edit/{id}',[App\Http\Controllers\UsersController::class,'showEditUserView'])->name('user.edit');
+    Route::post('/user-update',[App\Http\Controllers\UsersController::class,'updateUser'])->name('user.update');
+    Route::get('/user-delete/{id}',[App\Http\Controllers\UsersController::class,'deleteUser'])->name('user.delete');
     Route::get('/roles',[App\Http\Controllers\RolesController::class,'showRolesView'])->name('roles.show');
     Route::post('/add-rol',[App\Http\Controllers\RolesController::class,'addRol'])->name('rol.add');
     Route::get('/edit-rol/{id}',[App\Http\Controllers\RolesController::class,'showEditRolView'])->name('rol.edit');
