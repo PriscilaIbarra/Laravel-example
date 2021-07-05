@@ -82,21 +82,27 @@
         </div>
         <h3 class="uk-text-center">{{__('messages.Menu')}}</h3>
         <ul class="uk-list" uk-accordion="multiple: true">  
-              @auth                        
-              <li> 
-                    <a href="{{route('users.show')}}" style="font-size:17px">               
-                        <span class="uk-icon-button"  uk-icon="happy"> 
+              @auth           
+                @if(Auth::user()->hasRol('SuperAdmin')||Auth::user()->hasRol('Admin'))             
+                <li> 
+                        <a href="{{route('users.show')}}" style="font-size:17px">               
+                            <span class="uk-icon-button"  uk-icon="happy"> 
+                            </span> 
+                            {{__('messages.Users')}}
+                        </a>                      
+                </li>
+                <li> 
+                    <a  style="font-size:17px" href="{{route('roles.show')}}">               
+                        <span class="uk-icon-button"  uk-icon="server"> 
                         </span> 
-                        {{__('messages.Users')}}
-                    </a>                      
-              </li>
-              <li> 
-                  <a  style="font-size:17px" href="{{route('roles.show')}}">               
-                    <span class="uk-icon-button"  uk-icon="server"> 
-                    </span> 
-                    {{__('messages.Rols')}}
-                  </a> 
-              </li>  
+                        {{__('messages.Rols')}}
+                    </a> 
+                </li> 
+                @else 
+                <li>
+                    <p>Sin opciones disponibles</p>
+                </li>
+                @endif
             @endauth 
            <li>      
                 <a href="{{ route('logout') }}"
